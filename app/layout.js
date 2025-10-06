@@ -16,27 +16,22 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${inter.className}`}
-      >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-        <ClerkProvider appearance={{
-          baseTheme:shadesOfPurple,
-        }}>
-          <ConvexClientProvider>
-          {/* header */}
-          <Header/>
-          <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
-          {children}
-          </main>
-        </ConvexClientProvider>
-      </ClerkProvider>
-        </ThemeProvider>
+      <body className={inter.className}>
+        <ClerkProvider appearance={{ baseTheme: shadesOfPurple }}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <ConvexClientProvider>
+              <Header />
+              <main className="bg-slate-900 min-h-screen text-white overflow-x-hidden">
+                {children}
+              </main>
+            </ConvexClientProvider>
+          </ThemeProvider>
+        </ClerkProvider>
       </body>
     </html>
   );
