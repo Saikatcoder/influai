@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useEffect } from "react";
 import Link from "next/link";
 import { SignInButton, SignUpButton, UserButton } from "@clerk/nextjs";
@@ -9,7 +10,6 @@ import { LayoutDashboard } from "lucide-react";
 import { Authenticated, Unauthenticated } from "convex/react";
 import Image from "next/image";
 import { useStoreUser } from "@/convex/hook/useStoreUser";
-
 
 export default function Header() {
   const { isLoading, isAuthenticated } = useStoreUser();
@@ -65,6 +65,7 @@ export default function Header() {
             </Link>
           </div>
         )}
+
         {/* Auth Actions */}
         <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
           <Authenticated>
@@ -115,5 +116,3 @@ export default function Header() {
     </header>
   );
 }
-
-
