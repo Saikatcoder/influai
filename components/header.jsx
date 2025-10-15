@@ -16,29 +16,25 @@ export default function Header() {
   const path = usePathname();
   const router = useRouter();
 
-  // Redirect authenticated users from landing page to feed
+  // ✅ Redirect authenticated users to dashboard directly
   useEffect(() => {
     if (!isLoading && isAuthenticated && path === "/") {
-      router.push("/feed");
+      router.push("/dashboard");
     }
   }, [isLoading, isAuthenticated, path, router]);
 
-  // Hide header on dashboard and public profile/post pages
-  if (path.includes("/dashboard")) {
-    return null;
-  }
 
-  // Hide header on public profile and post pages (but not on feed)
-  if (path !== "/" && path !== "/feed" && path.split("/").length >= 2) {
+  if (path !== "/" && path !== "/feed" && path.split("/").length >= 2 && !path.includes("/dashboard")) {
     return null;
   }
 
   return (
     <header className="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-3xl px-4">
-      {/* Center - Glass Navigation Container */}
+      {/* Glass Navigation Container */}
       <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-full px-4 sm:px-6 md:px-8 py-3 flex items-center justify-between gap-2">
+        
         {/* Logo */}
-        <Link href={isAuthenticated ? "/feed" : "/"} className="flex-shrink-0">
+        <Link href={isAuthenticated ? "/dashboard" : "/"} className="flex-shrink-0">
           <Image
             src="/logo.png"
             alt="Creatr Logo"
@@ -48,7 +44,7 @@ export default function Header() {
           />
         </Link>
 
-        {/* Navigation for landing page only - Hidden on mobile to save space */}
+        {/* Landing Page Navigation */}
         {path === "/" && (
           <div className="hidden lg:flex space-x-6 flex-1 justify-center">
             <Link
@@ -69,15 +65,13 @@ export default function Header() {
         {/* Auth Actions */}
         <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
           <Authenticated>
-            {/* Show Dashboard link on feed page */}
-            {path === "/feed" && (
-              <Link href="/dashboard">
-                <Button variant="outline" className="hidden sm:flex" size="sm">
-                  <LayoutDashboard className="h-4 w-4" />
-                  <span className="hidden md:inline ml-2">Dashboard</span>
-                </Button>
-              </Link>
-            )}
+            {/* ✅ Dashboard link always visible when logged in */}
+            <Link href="/dashboard">
+              <Button variant="outline" className="hidden sm:flex" size="sm">
+                <LayoutDashboard className="h-4 w-4" />
+                <span className="hidden md:inline ml-2">Dashboard</span>
+              </Button>
+            </Link>
 
             <UserButton
               appearance={{

@@ -1,6 +1,10 @@
 import CustomMouse from "@/components/castomMouse";
 import { HeroSection } from "@/components/heroSectionComponnets/HeroSection";
 import FeaturesSection from "@/components/heroSectionComponnets/Features";
+import { SocialFeatures } from "@/components/heroSectionComponnets/SocialFeatures";
+import PlatformSection from "@/components/heroSectionComponnets/PlatformSection";
+import TestimonialSection from "@/components/heroSectionComponnets/TestimonialSection";
+import { CtaSection } from "@/components/heroSectionComponnets/CtaSection";
 
 
 export default function Home() {
@@ -11,6 +15,10 @@ export default function Home() {
     <CustomMouse/>
     <HeroSection/>
    <FeaturesSection/>
+   <PlatformSection/>
+   <SocialFeatures/>
+   <TestimonialSection/>
+   <CtaSection/>
    </div>
   );
 }
